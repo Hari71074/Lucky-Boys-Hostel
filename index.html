@@ -7,12 +7,25 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header>
-        <h1>Welcome to Lucky Boy's Hostel</h1>
-        <p>Best Hostel with Homely Atmosphere, Hygienic Facilities, and Great Food!</p>
-    </header>
+    <!-- Parallax Container -->
+    <div class="parallax-container">
+        <!-- Background Layers -->
+        <div class="parallax-layer parallax-layer1"></div>
+        <div class="parallax-layer parallax-layer2"></div>
+        <div class="parallax-layer parallax-layer3"></div>
 
-    <section id="registration">
+        <!-- Cinematic Overlay Content -->
+        <div class="parallax-content">
+            <h1 class="cinematic-title">Welcome to Lucky Boy's Hostel</h1>
+            <p class="cinematic-subtitle">A New World of Comfort and Care</p>
+            <a href="javascript:void(0);" class="cta-button" id="registerButton">Register Now</a>
+        </div>
+    </div>
+
+    <!-- Hidden Registration Section -->
+     
+
+    <section id="registration" style="display: none;">
         <h2>Register Now</h2>
         <form action="https://formspree.io/f/xdkognoz" method="POST" id="registrationForm">
             <div>
@@ -48,3 +61,4 @@
     <script src="script.js"></script>
 </body>
 </html>
+
