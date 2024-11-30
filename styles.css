@@ -1,118 +1,229 @@
 /* General Styles */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f7f7f7;
-    color: #333;
+    font-family: 'Poppins', sans-serif;
     margin: 0;
     padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+    overflow-x: hidden; /* Prevent horizontal scrolling */
 }
 
-header {
-    background-color: #2c3e50;
-    color: white;
+/* Parallax Container */
+.parallax-container {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    perspective: 1500px; /* Depth for 3D effects */
+    background-color: #000; /* Cinematic dark background */
+}
+
+/* Individual Layers */
+.parallax-layer {
+    position: absolute;
+    width: 120%;
+    height: 120%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    will-change: transform, opacity;
+    transition: transform 1s ease, opacity 1s ease;
+    filter: brightness(0.8); /* Darkens the layers slightly */
+}
+
+/* Cinematic Layer Effects */
+.parallax-layer1 {
+    background-image: url('parallax-layer1.jpg');
+    transform: translateZ(-200px) scale(1.3); /* Deep background layer */
+    z-index: 1;
+    opacity: 0.9;
+}
+
+.parallax-layer2 {
+    background-image: url('parallax-layer2.jpg');
+    transform: translateZ(-100px) scale(1.2); /* Middle layer */
+    z-index: 2;
+    opacity: 0.8;
+}
+
+.parallax-layer3 {
+    background-image: url('parallax-layer3.jpg');
+    transform: translateZ(0) scale(1.1); /* Foreground layer */
+    z-index: 3;
+    opacity: 1;
+}
+
+/* Hover Highlights */
+.parallax-container:hover .parallax-layer1 {
+    transform: translateY(-10%) translateZ(-180px) scale(1.25);
+    opacity: 1;
+    filter: brightness(1); /* Highlight effect */
+}
+
+.parallax-container:hover .parallax-layer2 {
+    transform: translateY(-15%) translateZ(-90px) scale(1.15);
+    opacity: 0.9;
+}
+
+.parallax-container:hover .parallax-layer3 {
+    transform: translateY(-20%) translateZ(0) scale(1.1);
+    opacity: 0.95;
+}
+
+/* Cinematic Overlay Content */
+.parallax-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     text-align: center;
-    padding: 20px;
+    z-index: 4; /* Above layers */
+    color: #fff;
 }
 
-header h1 {
-    font-size: 2.5em;
+.cinematic-title {
+    font-size: 3rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
+    text-shadow: 0 5px 15px rgba(255, 255, 255, 0.7),
+                 0 0 30px rgba(255, 255, 255, 0.5);
+    animation: glow 3s ease-in-out infinite alternate;
 }
 
-header p {
-    font-size: 1.2em;
+.cinematic-subtitle {
+    font-size: 1.5rem;
+    margin: 20px 0;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+    opacity: 0.9;
 }
 
+.cta-button {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    background: linear-gradient(45deg, #ff5722, #ff9800);
+    color: #fff;
+    border: none;
+    border-radius: 30px;
+    box-shadow: 0 5px 15px rgba(255, 87, 34, 0.6);
+    text-decoration: none;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.cta-button:hover {
+    transform: scale(1.1) rotateY(10deg);
+    box-shadow: 0 10px 20px rgba(255, 87, 34, 0.9);
+}
+
+/* Keyframes for Glowing Title */
+@keyframes glow {
+    from {
+        text-shadow: 0 5px 15px rgba(255, 255, 255, 0.7),
+                     0 0 30px rgba(255, 255, 255, 0.5),
+                     0 0 50px rgba(255, 255, 255, 0.3);
+    }
+    to {
+        text-shadow: 0 10px 25px rgba(255, 255, 255, 0.9),
+                     0 0 50px rgba(255, 255, 255, 0.7),
+                     0 0 70px rgba(255, 255, 255, 0.5);
+    }
+}
+
+/* Registration Form */
 #registration {
-    margin: 30px auto;
-    padding: 20px;
-    background-color: #ecf0f1;
-    width: 60%;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #f9f9f9;
+    padding: 60px;
+    margin: 0;
+    display: none; /* Hidden by default */
+    position: relative;
+    transition: transform 0.5s ease, opacity 0.3s ease;
 }
 
-h2 {
-    text-align: center;
-    font-size: 2em;
-    margin-bottom: 20px;
+#registration.show {
+    display: block;
+    transform: translateY(0) scale(1);
+    opacity: 1;
 }
 
-form {
+/* Add 3D effects on form */
+#registration h2 {
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
+    text-shadow: 0 5px 10px rgba(255, 255, 255, 0.5);
+}
+
+#registration form {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    transform-style: preserve-3d;
+    transition: transform 1s ease;
+    transform: rotateY(10deg); /* 3D rotation */
 }
 
-form div {
-    margin-bottom: 15px;
-    width: 100%;
-    max-width: 400px;
+#registration form:hover {
+    transform: rotateY(0deg); /* Remove rotation on hover */
 }
 
-form label {
-    display: block;
-    font-weight: bold;
-    margin-bottom: 5px;
+#registration label {
+    font-size: 1rem;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    color: #333;
 }
 
-form input, form select {
-    width: 100%;
-    padding: 10px;
-    font-size: 1em;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-/* Highlighted Payment Section */
-.payment-section {
-    background-color: #f39c12; /* Orange color to highlight */
+#registration input,
+#registration select {
     padding: 15px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
+    margin-bottom: 25px;
+    font-size: 1rem;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    background-color: #fff;
 }
 
-.payment-section label {
-    color: white;
-    font-weight: bold;
+/* Custom Styles for Email Field */
+#registration input[type="email"] {
+    color: white; /* Text color for email input */
+    background-color: #444; /* Optional: dark background for contrast */
+    border-color: #ff5722; /* Optional: orange border */
+    box-shadow: 0 5px 10px rgba(255, 87, 34, 0.3); /* Subtle glow effect */
 }
 
-.payment-section select {
-    background-color: #e67e22; /* Darker shade for the select box */
+#registration input:focus,
+#registration select:focus {
+    border-color: #ff5722;
+    box-shadow: 0 0 10px rgba(255, 87, 34, 0.7);
+    transform: translateZ(20px); /* 3D focus effect */
+}
+
+#registration button {
+    padding: 15px 30px;
+    background-color: #4CAF50;
     color: white;
     border: none;
-    border-radius: 5px;
-    padding: 10px;
-}
-
-/* Hover effects for buttons */
-button {
-    background-color: #2ecc71;
-    color: white;
-    padding: 12px 20px;
-    border: none;
-    border-radius: 5px;
-    font-size: 1.2em;
+    border-radius: 10px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+    transform: perspective(1000px) rotateX(0deg);
 }
 
-button:hover {
-    background-color: #27ae60;
+#registration button:hover {
+    background-color: #45a049;
+    transform: scale(1.1) rotateX(15deg); /* 3D effect on hover */
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.3);
 }
 
 footer {
-    background-color: #34495e;
+    background-color: #333;
     color: white;
+    padding: 20px 0;
     text-align: center;
-    padding: 15px;
-}
-
-footer a {
-    color: #ecf0f1;
-    text-decoration: none;
-}
-
-footer a:hover {
-    text-decoration: underline;
 }
